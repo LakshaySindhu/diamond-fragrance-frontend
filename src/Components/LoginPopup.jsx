@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useCart } from "./CartContext";
+import { API_URL } from "../config.js";
 
 const LoginPopup = ({ onClose, onGuestAccess }) => {
   // Modes: 'login', 'register', 'forgot'
@@ -25,7 +26,7 @@ const LoginPopup = ({ onClose, onGuestAccess }) => {
     try {
       if (mode === "login") {
         // LOGIN LOGIC
-        const { data } = await axios.post("http://localhost:5000/api/login", {
+        const { data } = await axios.post(`${API_URL}/api/login`, {
           email: formData.email,
           password: formData.password
         });
@@ -34,13 +35,13 @@ const LoginPopup = ({ onClose, onGuestAccess }) => {
       } 
       else if (mode === "register") {
         // REGISTER LOGIC
-        await axios.post("http://localhost:5000/register", formData);
+        await axios.post(`${API_URL}/register`, formData);
         setMessage("Account created! Please log in.");
         setMode("login");
       } 
       else if (mode === "forgot") {
         // FORGOT PASSWORD LOGIC
-        const { data } = await axios.post("http://localhost:5000/api/forgot-password", {
+        const { data } = await axios.post(`${API_URL}/api/forgot-password`, {
           email: formData.email
         });
         setMessage(data.message); // "Reset link sent..."

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useCart } from "./CartContext";
 import { useNavigate, Link } from "react-router-dom";
-
+import { API_URL } from "../config.js";
 // Validated Image Paths
 const backgroundImages = [
   "/assets/DFimg/Hero.jpeg",
@@ -34,7 +34,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/login",
+        `${API_URL}/api/login`,
         { email, password },
         { withCredentials: true }
       );

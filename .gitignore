@@ -7,6 +7,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Backend (deployed separately)
+backend/
+backend/.env
+backend/server.js
+
+# Environment
+*.env
+*.env.local
+*.env.*.local
+
 node_modules
 dist
 dist-ssr

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useCart } from "./CartContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config.js";
 
 // Premium Background Images
 const backgroundImages = [
@@ -78,7 +79,7 @@ const Checkout = () => {
       const totalAmount = getTotalPrice();
       // Initialize Order
       const { data } = await axios.post(
-        "http://localhost:5000/api/create-order",
+        `${API_URL}/api/create-order`,
         {
           amount: totalAmount,
           currency: "INR",
@@ -100,7 +101,7 @@ const Checkout = () => {
         handler: async function (response) {
           try {
             const verifyRes = await axios.post(
-              "http://localhost:5000/api/verify-payment",
+              `${API_URL}/api/verify-payment`,
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
